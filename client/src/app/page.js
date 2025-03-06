@@ -332,38 +332,3 @@ export default function VirtualTryOn() {
     </div>
   );
 }
-
-
-
-// "use client";
-// import React, { useEffect, useState } from "react";
-
-// const Page = () => {
-//   const [data, setData] = useState({});
-
-//   useEffect(() => {
-//     // Fetch the members data from Flask backend
-//     fetch("http://127.0.0.1:5000/members")
-//       .then((res) => res.json())
-//       .then((data) => {
-//         setData(data);
-//         console.log(data);
-//       })
-//       .catch((error) => {
-//         console.error("Error fetching data: ", error);
-//       });
-//   }, []);
-
-//   return (
-//     <div>
-//       {data.members === undefined ? (
-//         <p>Loading...</p> // Show loading until data is fetched
-//       ) : (
-//         // Map through the members array and display each member
-//         data.members.map((member, i) => <p key={i}>{member}</p>)
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Page;
