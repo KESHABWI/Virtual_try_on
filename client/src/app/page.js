@@ -7,8 +7,17 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
+import {
+  Shirt,
+  Camera,
+  History,
+  Zap,
+
+} from "lucide-react";
 
 export default function VirtualTryOn() {
+    const [activeTab, setActiveTab] = useState("try-on");
+
   const [autoMask, setAutoMask] = useState(false);
   const [autoCrop, setAutoCrop] = useState(false);
   const [humanImage, setHumanImage] = useState(null);
@@ -78,44 +87,110 @@ export default function VirtualTryOn() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-900 text-slate-50">
       {/* Navbar */}
-      <nav className="bg-slate-800 p-4">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="text-4xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent tracking-tight transform hover:scale-105 transition-all">
-            👗🤖 VIRTUAL TRY ON ༄*
-            <span className="text-purple-300 animate-pulse">⤷</span>
-          </div>{" "}
-          <div className="flex space-x-4">
-            <a href="#" className="hover:text-slate-300">
+
+      {/* Header */}
+      <header className="border-b border-slate-700 bg-slate-900/80 backdrop-blur-sm">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4">
+          <div className="flex items-center gap-2">
+            <Shirt className="h-8 w-8 text-indigo-400" />
+            <span className="text-xl font-bold tracking-tight">
+              VIRTUAL FIT
+            </span>
+          </div>
+          <nav className="hidden space-x-6 md:flex">
+            <a
+              href="#"
+              className="text-sm font-medium text-white/90 transition hover:text-indigo-400"
+            >
               Home
             </a>
-            <a href="#" className="hover:text-slate-300">
+            <a
+              href="#"
+              className="text-sm font-medium text-white/70 transition hover:text-indigo-400"
+            >
+              My Wardrobe
+            </a>
+            <a
+              href="#"
+              className="text-sm font-medium text-white/70 transition hover:text-indigo-400"
+            >
+              History
+            </a>
+            <a
+              href="#"
+              className="text-sm font-medium text-white/70 transition hover:text-indigo-400"
+            >
               About
             </a>
-            <a href="#" className="hover:text-slate-300">
-              Contact
-            </a>
-          </div>
+          </nav>
+          <Button
+            variant="outline"
+            className="hidden border-slate-700 bg-slate-800/50 text-white hover:bg-slate-700 md:flex"
+          >
+            Sign In
+          </Button>
+          <Button size="icon" variant="ghost" className="md:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-6 w-6"
+            >
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
+          </Button>
         </div>
-      </nav>
+      </header>
 
       {/* Main content */}
       <main className="flex-grow p-6">
         <div className="max-w-7xl mx-auto space-y-6">
           {/* Cool Virtual Try On title */}
-          <div className="text-center mb-8">
-            <div className="text-4xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent tracking-tight transform hover:scale-105 transition-all">
-              TRY YOUR CLOTHES
-              <span className="text-purple-300 animate-pulse">⤷</span>
-            </div>{" "}
-            <p className="text-slate-400 flex items-center justify-center">
-              Experience the future of fashion{" "}
-              <Sparkles className="ml-2 h-5 w-5" />
-            </p>
-          </div>
 
-          <div className="text-sm breadcrumbs">
-            <span>Transform your look with AI-powered virtual fitting.</span>
-          </div>
+          <section className="container mx-auto px-4 text-center">
+            <h1 className="mb-2 text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
+              <span className="text-indigo-400">Virtual</span> Fitting Room
+            </h1>
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-white/70">
+              Experience the future of fashion with AI-powered virtual try-on
+              technology
+            </p>
+            <Tabs
+              defaultValue="try-on"
+              className="mx-auto max-w-5xl"
+              onValueChange={setActiveTab}
+            >
+              <TabsList className="mb-8 grid w-full grid-cols-3 bg-slate-800/50">
+                <TabsTrigger
+                  value="try-on"
+                  className="data-[state=active]:bg-slate-700"
+                >
+                  Try On
+                </TabsTrigger>
+                <TabsTrigger
+                  value="wardrobe"
+                  className="data-[state=active]:bg-slate-700"
+                >
+                  My Wardrobe
+                </TabsTrigger>
+                <TabsTrigger
+                  value="history"
+                  className="data-[state=active]:bg-slate-700"
+                >
+                  History
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </section>
+
 
           {/* Rest of your component code goes here */}
           <div className="grid md:grid-cols-3 gap-6">
@@ -322,11 +397,28 @@ export default function VirtualTryOn() {
           </div>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-slate-800 p-4 mt-8">
-        <div className="max-w-7xl mx-auto text-center text-slate-400 text-sm">
-          © 2023 FashionAI. All rights reserved. | Powered by AI magic ✨
+      <footer className="border-t border-slate-800 bg-slate-900 py-8">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <div className="flex items-center gap-2">
+              <Shirt className="h-6 w-6 text-indigo-400" />
+              <span className="text-lg font-bold">VIRTUAL FIT</span>
+            </div>
+            <div className="flex gap-8 text-sm text-slate-400">
+              <a href="#" className="hover:text-indigo-400">
+                Terms
+              </a>
+              <a href="#" className="hover:text-indigo-400">
+                Privacy
+              </a>
+              <a href="#" className="hover:text-indigo-400">
+                Contact
+              </a>
+            </div>
+            <div className="text-sm text-slate-500">
+              © 2025 Virtual Fit. All rights reserved.
+            </div>
+          </div>
         </div>
       </footer>
     </div>
